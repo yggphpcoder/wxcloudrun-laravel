@@ -16,6 +16,7 @@ use Exception;
 use App\Counters;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class CounterController extends Controller
 {
@@ -25,6 +26,33 @@ class CounterController extends Controller
      */
     public function getCount()
     {
+        if (extension_loaded('PDO_MYSQL')) {
+            try {
+                $dbh = new \PDO('mysql:host=10.35.100.244;dbname=laravel_demo', 'root', 'K$3K)h0s');
+                $sth = $dbh->query('SELECT VERSION() as version');
+                $info = $sth->fetch();
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
+            echo $info['version'];
+        } else {
+            echo 'PDO_MYSQL 扩展未安装';
+           
+        }
+
+        if (extension_loaded('PDO_MYSQL')) {
+            try {
+                $dbh = new \PDO('mysql:host=10.0.4.4;dbname=study_room', 'ygg', 'Zjj19910731.');
+                $sth = $dbh->query('SELECT VERSION() as version');
+                $info = $sth->fetch();
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
+            echo $info['version'];
+        } else {
+            echo 'PDO_MYSQL 扩展未安装';
+           
+        }
         try {
             $data = (new Counters)->find(1);
             if ($data == null) {
@@ -86,7 +114,7 @@ class CounterController extends Controller
             $res = [
                 "code" => -1,
                 "data" => [],
-                "errorMsg" => ("更新计数异常" . $e->getMessage())
+                "errorMsg" => ("更新计数异常11111" . $e->getMessage()),
             ];
             Log::info('updateCount rsp: '.json_encode($res));
             return response()->json($res);
