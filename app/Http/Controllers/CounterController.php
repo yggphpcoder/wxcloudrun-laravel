@@ -40,19 +40,19 @@ class CounterController extends Controller
            
         }
 
-        if (extension_loaded('PDO_MYSQL')) {
-            try {
-                $dbh = new \PDO('mysql:host=10.0.4.4;dbname=study_room', 'ygg', 'Zjj19910731.');
-                $sth = $dbh->query('SELECT VERSION() as version');
-                $info = $sth->fetch();
-            } catch (\PDOException $e) {
-                echo $e->getMessage();
-            }
-            echo $info['version'];
-        } else {
-            echo 'PDO_MYSQL 扩展未安装';
+        // if (extension_loaded('PDO_MYSQL')) {
+        //     try {
+        //         $dbh = new \PDO('mysql:host=10.0.4.4;dbname=study_room', 'ygg', 'Zjj19910731.');
+        //         $sth = $dbh->query('SELECT VERSION() as version');
+        //         $info = $sth->fetch();
+        //     } catch (\PDOException $e) {
+        //         echo $e->getMessage();
+        //     }
+        //     echo $info['version'];
+        // } else {
+        //     echo 'PDO_MYSQL 扩展未安装';
            
-        }
+        // }
         try {
             $data = (new Counters)->find(1);
             if ($data == null) {
